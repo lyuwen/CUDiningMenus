@@ -1,37 +1,20 @@
 language: python
-
-# branches:
-#   only:
-#     - master
-
 os:
-  - linux
-
+- linux
 cache: pip
-
 virtualenv:
   system_site_packages: false
-
 python:
-  - '3.6'
-
+- '3.6'
 install:
-  - pip install --ignore-installed -r requirements.txt
+- pip install --ignore-installed -r requirements.txt
+script: 'python3 getDiningMenu.py > diningmenus.json
 
-script: |
-  python3 getDiningMenu.py > diningmenus.json
-
-# before_deploy:
-#   - git config --local user.name "lyuwen"
-#   - git config --local user.email "fulvwen@gmail.com"
-#   - git tag -f nightly
-
-
+'
 deploy:
-  overwrite: true
   provider: releases
   api_key:
-    secure: UXCydUuc4SglKTQkUnM3IL7nxunzIWv8MTCkGAuqUtbsj4FoRlwPGVsO1LYFgoyUQUZWk8uew3SMKxxTn6lP5rPDWvSbsT0odvxoi5XV9kqypY5lLtJ1oJ8CjvZ33REYWNyYFKexfEHVePo8wbVPYZtALZvCyRJKBLGAARP62E28oP7dcQRstfJ0D8Q018G1BSqnFXP/13z1aWAKUnKZ+YS8DbxcTdbyCE47B4azRwU9pYaBtkdhqq/t31mzH69h0N+zINUY2LbW4NcQxfRpcgf7xKanRQIvBNYxL7GIof/jZrFZkZk1CCx26z3OLYSyo+lkAv4H5ex66HM0DVKJJpW4mAVZmNgNPTlY/XCjnhwHdXAC06CQ5sfwFmSneo7WYk96Rz4OKjkQFg9yddNM81JY/YedkKiCCYoCG9pNz1sLABi4JSPViW4Frvbx8N9LTfdSIC/ta8kkEg+Lan+T+Dp87s+xYBpElflLNsmfBU9TbMPWQeubYxDJeflzldQ1C5RCvsIiphE+P7hPgZfkmPvS02+rqvd0cJYXYzGkDNRNeGq6KZDanIZGbgnF95lglBND4Z1xFFbXR0nIlKJYNvEh0DdKjXYNUR74snAfUD4/eviVfBl83FTEw8tzJC1fxbb2SA9KkEEh64/OIwgRsRfkgn6PucHvZcMACO/0EFU=
+    secure: NsPTCn5jAX0E1khtwtoAOgX7X79pw2lRZJQhKMm958VFBf8hm946QhMDHXuDJptx546s5xf5Y6i7ah4wFe7C2FD1w6DngMkvtQDd9sTv0uGjXc0csdPO5SXxxzdEsI1OpHJB97WQdEYOe7fheq3hB9KDEz5/a7uWpWUpgNSbsjFNFc2wzz57uzOugTXk5a0DdKW+0PkYOTUyqCDytPhftQHg802XfRx2YPbSoaPLi2VLAfaDys/kiHkdLL3bmhaZlKsdbgKs2SzCFmT7uDK/YDlFVI+NLBbG66T1xDjc4GdNJ6nh+ukrZHLRR3RJWD9ezwBL1NIg5mkMWeS/B3bmjFVyx14L5bfFM8qJtmPCvh1+MmwmAa8k3pcEILKm43BGmm0/uwCMnY62DTSxkxpF/JQhJMspjaoHELvaZrAZ2SyBht0XKX4puBuwYhE8f7xeXlsolWLcu4lP5Cn/9xILDdRp2EtXbRoYFnzKwCyMgoaPNekLA1EH+ILUyQhZAUR+ILjrugzNVIIelVOOaveKVzBvAGupber2WG9GfWv12212zLuCrqZ7OcY+bBkMVB9rOZXDMAuGk3QjQROtu6ZQea3kOCQ2bvzjwNcuTBLF9EEGXyMEWiC0MWmOkYzTEZGj9IhGZnesaNhFoYK9hH/0G3e+toL3ggwszH+lpUua9Oo=
   file: diningmenus.json
   on:
-    tags: true
+    repo: lyuwen/CUDiningMenus
