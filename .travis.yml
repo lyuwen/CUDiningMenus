@@ -2,7 +2,7 @@ language: python
 
 branches:
   only:
-  - master
+    - master
 
 os:
   - linux
@@ -13,10 +13,24 @@ virtualenv:
   system_site_packages: false
 
 python:
-  - "3.6"
+  - '3.6'
 
 install:
   - pip install --ignore-installed -r requirements.txt
 
 script: |
   python3 getDiningMenu.py > diningmenus.json
+
+before_deploy:
+  - git config --local user.name "lyuwen"
+  - git config --local user.email "fulvwen@gmail.com"
+  - git tag -f nightly
+  - git push --tags -f
+
+deploy:
+  provider: releases
+  api_key:
+    secure: TF2Og0CkTIJNEapZ97p1aGlF73TgLjGZE06FvFpRtys/98SO+PX3n5jJLNxWzUYtXfkaRHnT9Bev0oUVQm/GMme2InHr5JpvAQZhESuiF+dnsC37mTk7e+aMjN5moRu117VWQni9p3mMVddbmhCLzntZPLy6QgG4iw1lEyu4KwxIdQn9OrdGSZY6ehJOsLc6cOsA8Mvz1L+9EPCWz2S/p1ENG0X8TxxBpXrkf113jKKcyjEcl7qO3PGxEy5NMuT3XZYNUlN5Y0wBw0ZDyR4gVLNRl7OKDckEg3E9bwd436SbGmTm4GdtZBSa3BJQQXxxZgkhMaqTu82vv3ymDII/ZMrzcOKi7PnM0QuZTwx6727cwcSnarR7OEQyNHg9QcqOhu/FWJ5AlvhJwY+NvzDpUM0Ov4t6/+0BDEGfsGcmD65kLe6PHdwjKhm0+BxiVOEywJaujhq40zEiyeMk9zMypImh6tMD5kjto+GE3f+Y5OOnwN67pb40ll1lgLUySf9o8f1+TtgpjKFHw4MfRKl5z0ZJ5/vM1u+thtC1F3e0+Cv6vjEUF3Tw4y5hpQ2CoSNmLeOTEux+ZD/Iu4j/caRLMAv0WMuSvQNNdwYaUXUprEw1KH5ScLMmShpXC2zPHxcyHmstMA3jJHIIzps02B9JwNoOq4+N6rqDeZ92L48q5n8=
+  file: 'diningmenus.json'
+  on:
+    repo: lyuwen/CUDiningMenus
