@@ -8,6 +8,10 @@ cache: pip
 virtualenv:
   system_site_packages: false
 
+env:
+  global:
+    secure: LgwnxtTXrML2RucbG+hkXkFgVPDVAqYe8quQ8dWYu3EVkZ0Kt9n/BUUw+1NIiXQ8jGcfzpb7ZVqXm4WlLpB1GCZx178A7zjdb6t2XiW2Kvl0d4gtn/kf6lvNWDHt6HLHAc9Gc+JsFP/WLbrlyku4Dc47ufGTpIA2c7DtNz86lSyB5XEzGllQf1XWSyL7S1ihCmq8LslKYItMp2Ut/RpOFC/caBouQ8AN6/3j6dYy4P8XSPnk4NWOjTTyiU87i53mEuEb5QEm7J6ci9azWP7MMUaz+7LwukX8o7kEoj1WNbfz1edVMr8DB/8CvxjWvNWEXloqFcfjjz76PPvpiQYMeKpMPRSZ/RqwYoXLSoJTq9LnCzIMnXUdWz/C+8/jxf4NIZiOBzNvxAG0Htu47JPh3SDEiGrrFrgZPZmg4wjumT7BZZTutI9YwxBM06Qr3965jUQ2XvEMKnWNtL7FsJdIzyrCcM3tjDnIymvgr5hoIpQhGcP5LglKTAGfF5MBqPg4FqGOgJOjPhNFmGtyowPkvYLiHgA7B9B7lALN+ypIP0UtLCAm3RkyedYBvPJ9fF56XR98aabqHnIf6dYcgzOAPyyvvFrchLbCWXc9stVpwU/dV6bDUf23/WwG3kXJB3nelTjm/lUerXDA0LEMmPcGVuZEMWI7aE/NhsHnRrEEgCI=
+
 python:
   - '3.6'
 
@@ -20,13 +24,15 @@ script: |
 before_deploy:
   - git config --local user.name "lyuwen"
   - git config --local user.email "fulvwen@gmail.com"
-  - git tag -f "nightly-"$(date +"%Y%m%d-%H%M%S")
+  - git tag -f "nightly"
+  - git remote add origin-push https://${GH_TOKEN}@github.com/lyuwen/CUDiningMenus.git > /dev/null 2>&1
+  - git push --quiet --tags -f origin-push
 
 deploy:
   overwrite: true
   skip_cleanup: true
   provider: releases
-  # tag_name: nightly
+  tag_name: nightly
   # target_commitish: $TRAVIS_COMMIT
   api_key:
     secure: F2MkUgxXhQ2B/yS+qjr+gjdqg3hO3ZDV+7Nvx3kmXDCnQxlk83kpWG1amjPiiTyhL/dlqmX4MTxtQy93wqtsjrzR+12GhpSX42/tZeYEchORGC8fpWR77jCRTPZOlwXP3WIjQPKrCCHMtqkc5i97+lTpLX8MXP06LZp86ptkFDcPV56mGlNNILveus3n9zbecEP26nuF1iGrivEKQyHT1CF8wS4VC0QosufV/68ttluw/835T0oNLxDsfoAKfdK8gtvcISA5pKY0QvtBQ2FBQ9OTmybk2kZ2aAxOgqibzUzswxNECZB7pC30seIc+GmJBLP7Exm/Thrs19souOZDBO27WDAmHvrkxZD/q7ES9W3OchgZF89i68o2heYjb2WG6oq40RIGT275QqyBqmZDyKcqQun9ZIRrEdq25hIsSDvYlbI1zx8ECY098NL6GKwCnDZBHb/6/C2Tn2+ta+xR4phfgBD+x6+ThksI+/vDgkgjfYwIT65pshNWbmZjFlbCAVCbU1y8bbYhaGIUPymE+nR9q3sq4boo+YcwJZd9Z1I5GdowaiFxolA3hcQJmobFqupPAyFnlYPtedoDm1kWbEHMlRPcU+7dokWs66UTGHUM+U2H6WKKAanlrJ3yFz+lTDQaH99DkrbQO7Pjw8bv4f6TBS4b6J7NlxIVt6BZ5z4=
