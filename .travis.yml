@@ -21,16 +21,16 @@ install:
 script: |
   python3 getDiningMenu.py > diningmenus.json
 
-before_deploy:
-  - git config --local user.name "lyuwen"
-  - git config --local user.email "fulvwen@gmail.com"
-  - git tag -f nightly
-  - git push --tags -f
+# before_deploy:
+#   - git config --local user.name "lyuwen"
+#   - git config --local user.email "fulvwen@gmail.com"
+#   - git tag -f nightly
 
 deploy:
+  overwrite: true
   provider: releases
   api_key:
-    secure: TF2Og0CkTIJNEapZ97p1aGlF73TgLjGZE06FvFpRtys/98SO+PX3n5jJLNxWzUYtXfkaRHnT9Bev0oUVQm/GMme2InHr5JpvAQZhESuiF+dnsC37mTk7e+aMjN5moRu117VWQni9p3mMVddbmhCLzntZPLy6QgG4iw1lEyu4KwxIdQn9OrdGSZY6ehJOsLc6cOsA8Mvz1L+9EPCWz2S/p1ENG0X8TxxBpXrkf113jKKcyjEcl7qO3PGxEy5NMuT3XZYNUlN5Y0wBw0ZDyR4gVLNRl7OKDckEg3E9bwd436SbGmTm4GdtZBSa3BJQQXxxZgkhMaqTu82vv3ymDII/ZMrzcOKi7PnM0QuZTwx6727cwcSnarR7OEQyNHg9QcqOhu/FWJ5AlvhJwY+NvzDpUM0Ov4t6/+0BDEGfsGcmD65kLe6PHdwjKhm0+BxiVOEywJaujhq40zEiyeMk9zMypImh6tMD5kjto+GE3f+Y5OOnwN67pb40ll1lgLUySf9o8f1+TtgpjKFHw4MfRKl5z0ZJ5/vM1u+thtC1F3e0+Cv6vjEUF3Tw4y5hpQ2CoSNmLeOTEux+ZD/Iu4j/caRLMAv0WMuSvQNNdwYaUXUprEw1KH5ScLMmShpXC2zPHxcyHmstMA3jJHIIzps02B9JwNoOq4+N6rqDeZ92L48q5n8=
-  file: 'diningmenus.json'
+    secure: UXCydUuc4SglKTQkUnM3IL7nxunzIWv8MTCkGAuqUtbsj4FoRlwPGVsO1LYFgoyUQUZWk8uew3SMKxxTn6lP5rPDWvSbsT0odvxoi5XV9kqypY5lLtJ1oJ8CjvZ33REYWNyYFKexfEHVePo8wbVPYZtALZvCyRJKBLGAARP62E28oP7dcQRstfJ0D8Q018G1BSqnFXP/13z1aWAKUnKZ+YS8DbxcTdbyCE47B4azRwU9pYaBtkdhqq/t31mzH69h0N+zINUY2LbW4NcQxfRpcgf7xKanRQIvBNYxL7GIof/jZrFZkZk1CCx26z3OLYSyo+lkAv4H5ex66HM0DVKJJpW4mAVZmNgNPTlY/XCjnhwHdXAC06CQ5sfwFmSneo7WYk96Rz4OKjkQFg9yddNM81JY/YedkKiCCYoCG9pNz1sLABi4JSPViW4Frvbx8N9LTfdSIC/ta8kkEg+Lan+T+Dp87s+xYBpElflLNsmfBU9TbMPWQeubYxDJeflzldQ1C5RCvsIiphE+P7hPgZfkmPvS02+rqvd0cJYXYzGkDNRNeGq6KZDanIZGbgnF95lglBND4Z1xFFbXR0nIlKJYNvEh0DdKjXYNUR74snAfUD4/eviVfBl83FTEw8tzJC1fxbb2SA9KkEEh64/OIwgRsRfkgn6PucHvZcMACO/0EFU=
+  file: diningmenus.json
   on:
-    repo: lyuwen/CUDiningMenus
+    tags: true
