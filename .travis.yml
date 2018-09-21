@@ -1,0 +1,22 @@
+language: python
+
+branches:
+  only:
+  - master
+
+os:
+  - linux
+
+cache: pip
+
+virtualenv:
+  system_site_packages: false
+
+python:
+  - "3.6"
+
+install:
+  - pip install --ignore-installed -r requirements.txt
+
+script: |
+  python3 getDiningMenu.py > diningmenus.json
