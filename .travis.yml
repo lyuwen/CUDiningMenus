@@ -1,9 +1,5 @@
 language: python
 
-# branches:
-#   only:
-#     - master
-
 os:
   - linux
 
@@ -25,7 +21,6 @@ before_deploy:
   - git config --local user.name "lyuwen"
   - git config --local user.email "fulvwen@gmail.com"
   - git tag -f nightly
-
 
 deploy:
   overwrite: true
