@@ -28,7 +28,7 @@ script: |
 before_deploy:
   - git config --local user.name "lyuwen"
   - git config --local user.email "fulvwen@gmail.com"
-  - git tag -f "nightly"
+  - git tag -f -a "nightly" -m "Nightly build on $(date +'%Y-%m-%d %H:%M:%S')"
   - git remote add origin-push https://${GH_TOKEN}@github.com/lyuwen/CUDiningMenus.git > /dev/null 2>&1
   - git push --quiet --tags -f origin-push
 
