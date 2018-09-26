@@ -9,9 +9,9 @@ def get_menu_list(url):
   soup = BeautifulSoup(requests.get(url).content, "html.parser")
   return [s.find("a", {"title": "Full Node View"}).getText() for s in soup.find_all("div", {"class": "field-item"})]
 
-url_base = "http://dining.columbia.edu/"
+url_base = "https://dining.columbia.edu"
 
-url_menu = url_base + "menus"
+url_menu = url_base + "/menus"
 
 header = {
   "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:36.0) Gecko/20100101 Firefox/36.0",
@@ -21,7 +21,7 @@ session = requests.session()
 
 soup = BeautifulSoup(session.get(url_menu).content, 'html.parser')
 form = soup.find("form", {"id": "future-menus-form"})
-form_build_id = soup.find("input", {"id": "edit-future-menus-form"}).attrs["value"]
+form_build_id = form.find("input", {"name": "form_build_id"}).attrs["value"]
 
 menus = {}
 
@@ -42,7 +42,7 @@ for ddate in range(6):
   soup = BeautifulSoup(respond.content.decode("unicode_escape"), 'html.parser')
 
   menu = dict([(location.find_all("td")[0].getText(), \
-      dict([(meal.getText(), get_menu_list("http://dining.columbia.edu{}".format(meal.attrs["href"]))) \
+      dict([(meal.getText(), get_menu_list("https://dining.columbia.edu{}".format(meal.attrs["href"]))) \
       for meal in location.find_all("td")[1].find_all("a")])) \
       for location in soup.find_all("tr")[1:]])
 
